@@ -1,6 +1,18 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import dynamic from 'next/dynamic';
+
+// Dynamically import components with no SSR
+const Chatbot = dynamic(
+  () => import('./components/Chatbot'),
+  { ssr: false }
+);
+
+const SpeechToText = dynamic(
+  () => import('./components/SpeechToText'),
+  { ssr: false }
+);
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +40,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body className={inter.className}>
         <main className="text-base bg-background/95 text-foreground">
           {children}
+          <Chatbot />
+          <SpeechToText />
         </main>
       </body>
     </html>
