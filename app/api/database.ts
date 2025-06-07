@@ -1,73 +1,49 @@
 // A mock database with example users
 const USER_INFO: Liveblocks["UserMeta"][] = [
   {
-    id: "charlie.layne@example.com",
+    id: "rounak.sen.21@aot.edu.in",
     info: {
-      name: "Charlie Layne",
+      name: "Rounak Sen",
       color: "#D583F0",
       avatar: "https://liveblocks.io/avatars/avatar-1.png",
     },
   },
   {
-    id: "mislav.abha@example.com",
+    id: "swarnadeep.roy.21@aot.edu.in",
     info: {
-      name: "Mislav Abha",
+      name: "Swarnadeep Roy",
       color: "#F08385",
       avatar: "https://liveblocks.io/avatars/avatar-2.png",
     },
   },
   {
-    id: "tatum.paolo@example.com",
+    id: "gautam.nag.21@aot.edu.in",
     info: {
-      name: "Tatum Paolo",
+      name: "Gautam Nag",
       color: "#F0D885",
       avatar: "https://liveblocks.io/avatars/avatar-3.png",
     },
   },
   {
-    id: "anjali.wanda@example.com",
+    id: "debjit.mukhopadhyay.21@aot.edu.in",
     info: {
-      name: "Anjali Wanda",
+      name: "Debjit Mukhopadhyay",
       color: "#85EED6",
       avatar: "https://liveblocks.io/avatars/avatar-4.png",
     },
   },
   {
-    id: "jody.hekla@example.com",
+    id: "ankur.sinharoy.21@aot.edu.in",
     info: {
-      name: "Jody Hekla",
+      name: "Ankur Sinharoy",
       color: "#85BBF0",
       avatar: "https://liveblocks.io/avatars/avatar-5.png",
-    },
-  },
-  {
-    id: "emil.joyce@example.com",
-    info: {
-      name: "Emil Joyce",
-      color: "#8594F0",
-      avatar: "https://liveblocks.io/avatars/avatar-6.png",
-    },
-  },
-  {
-    id: "jory.quispe@example.com",
-    info: {
-      name: "Jory Quispe",
-      color: "#85DBF0",
-      avatar: "https://liveblocks.io/avatars/avatar-7.png",
-    },
-  },
-  {
-    id: "quinn.elton@example.com",
-    info: {
-      name: "Quinn Elton",
-      color: "#87EE85",
-      avatar: "https://liveblocks.io/avatars/avatar-8.png",
     },
   },
 ];
 
 export function getRandomUser() {
-  return USER_INFO[Math.floor(Math.random() * 10) % USER_INFO.length];
+  return USER_INFO[Math.floor(Math.random() * USER_INFO.length)];
 }
 
 export function getUser(id: string) {
