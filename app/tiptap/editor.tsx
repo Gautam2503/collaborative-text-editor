@@ -62,7 +62,14 @@ export default function TiptapEditor({ userId, workspaceId, fileId, filename, in
 
   return (
     <div className="relative min-h-screen flex flex-col">
-      <div className="h-[60px] flex items-center justify-end px-4 border-b border-border/80 bg-background">
+      <div className="h-[60px] flex items-center justify-between px-4 border-b border-border/80 bg-background">
+        <a 
+          href={process.env.NEXT_PUBLIC_HOMEPAGE_URL || 'https://example.com'}
+          className="text-blue-600  text-sm font-medium ml-4"
+        >
+          {process.env.image}
+        </a>
+        <div className="flex items-center">
         <button
           type="submit"
           className="bg-primary-foreground p-2 m-5 rounded-md text-primary text-sm font-semibold"
@@ -97,8 +104,9 @@ export default function TiptapEditor({ userId, workspaceId, fileId, filename, in
         </button>
 
 
-        <VersionsDialog editor={editor} fileId={fileId} />
-        <NotificationsPopover />
+          <VersionsDialog editor={editor} fileId={fileId} />
+          <NotificationsPopover />
+        </div>
       </div>
       <div className="border-b border-border/80 bg-background">
         <Toolbar editor={editor} className="w-full" />

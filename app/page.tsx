@@ -27,7 +27,7 @@ export default function Page() {
     return <div>Missing parameters</div>
   }
 
-  const roomId = (!userId || !workspaceId) ? "liveblocks:examples:nextjs-tiptap" : `liveblocks:examples:${userId}-${workspaceId}`;
+  const roomId = (!userId || !workspaceId) ? "liveblocks:examples:nextjs-tiptap" : `liveblocks:examples:${fileId}-${workspaceId}`;
 
   useEffect(() => {
     (async () => {
