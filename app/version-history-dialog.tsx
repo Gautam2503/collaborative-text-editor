@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Editor } from "@tiptap/react";
 import Loading from "./loading";
 import {
@@ -8,9 +8,34 @@ import {
 } from "@liveblocks/react-ui";
 import { useHistoryVersions } from "@liveblocks/react";
 import { HistoryVersionPreview } from "@liveblocks/react-tiptap";
+import axios from "axios";
 
-export default function VersionsDialog({ editor }: { editor: Editor | null }) {
+export default function VersionsDialog({ editor, fileId }: { editor: Editor | null, fileId: string }) {
   const [isOpen, setOpen] = useState(false);
+  const [versions, setVersions] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!editor) return;
+    axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/file/versions/${fileId}`
+    ).then((response) => {
+      setVersions(response.data || []);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, [isOpen]);
+
+  async function versionDetails(versionId: string): Promise<string> {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/file/versions/${fileId}/${versionId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return versionId;
+    }
+  }
 
   const onVersionRestore = useCallback(() => {
     setOpen(false);
@@ -41,7 +66,34 @@ export default function VersionsDialog({ editor }: { editor: Editor | null }) {
           <Dialog.Description className="sr-only">
             Previous versions of this document
           </Dialog.Description>
-          {editor && <Versions onVersionRestore={onVersionRestore} editor={editor} />}
+          {/* {editor && <Versions onVersionRestore={onVersionRestore} editor={editor} />} */}
+          {
+            versions.length === 0 ? (
+              <div className="flex h-full items-center justify-center p-6 text-muted-foreground">
+                No versions yet
+              </div>
+            ) : (
+              <div className="flex h-full flex-col gap-4 p-6">
+                {
+                  versions.map((version) => (
+                    <div key={version} className="border border-border bg-card flex justify-between">
+                      <h3 className="text-center flex-grow">{version}</h3>
+                      <button className="p-4 text-card-foreground focus:outline-none" 
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        const url = await versionDetails(version);
+                        console.log(url);
+                        window.open(url, '_blank', 'noopener,noreferrer');
+                      }}
+                      >
+                        Visit
+                      </button>
+                    </div>
+                  ))
+                }
+              </div>
+            )
+          }
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
