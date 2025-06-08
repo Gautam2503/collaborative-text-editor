@@ -61,13 +61,13 @@ export default function TiptapEditor({ userId, workspaceId, fileId, filename, in
   // }, [editor, initialContent]);
 
   return (
-    <div className="relative min-h-screen flex flex-col">
-      <div className="h-[60px] flex items-center justify-between px-4 border-b border-border/80 bg-background">
+    <div className="relative min-h-screen flex flex-col bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
+      <div className="h-[60px] flex items-center justify-between px-4 border-b border-border/80  bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
         <a 
-          href={'https://dms-frontend-liard.vercel.app'}
-          className="text-blue-600  text-sm font-medium ml-4"
+          href={process.env.NEXT_PUBLIC_HOMEPAGE_URL}
+          className="text-2xl font-bold text-white"
         >
-          {process.env.image}
+          Vault
         </a>
         <div className="flex items-center">
         <button
